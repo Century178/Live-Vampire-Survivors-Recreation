@@ -336,7 +336,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -802.50006, y: 0}
+  m_AnchoredPosition: {x: -802.5, y: 0}
   m_SizeDelta: {x: -1605, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &366483141
@@ -1637,6 +1637,7 @@ GameObject:
   - component: {fileID: 1394149089}
   - component: {fileID: 1394149091}
   - component: {fileID: 1394149090}
+  - component: {fileID: 1394149092}
   m_Layer: 5
   m_Name: ExpBarBackground
   m_TagString: Untagged
@@ -1703,6 +1704,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1394149088}
   m_CullTransparentMesh: 1
+--- !u!114 &1394149092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1394149088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9d6ea4f01725864287478d0471a4fae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expBar: {fileID: 1394149090}
 --- !u!1 &1556719215
 GameObject:
   m_ObjectHideFlags: 0
@@ -1800,7 +1814,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onAlpha: 1
   offAlpha: 0
-  transitionSpeed: 1
+  transitionSpeed: 5
   targetAlpha: 0
   currentState: 0
 --- !u!225 &1556719220
@@ -1832,7 +1846,13 @@ MonoBehaviour:
   - {fileID: 1309945136}
   - {fileID: 639884204}
   canvasGroupHelper: {fileID: 1556719219}
-  upgrades: []
+  upgrades:
+  - {fileID: 11400000, guid: 44e721f7699da6f489d898760b76ab95, type: 2}
+  - {fileID: 11400000, guid: 809c5b7261a46be4fa7d6bb6070c88b7, type: 2}
+  - {fileID: 11400000, guid: 8c280c13c1d27fb4b9f9e1439a541382, type: 2}
+  - {fileID: 11400000, guid: e99ac025780217b4d923253b381c5977, type: 2}
+  - {fileID: 11400000, guid: e94ea947893e586408662dd7bf7db5f5, type: 2}
+  - {fileID: 11400000, guid: 425ea752cf2471b43a71e3778ec747df, type: 2}
 --- !u!1 &1601321516
 GameObject:
   m_ObjectHideFlags: 0
@@ -2026,7 +2046,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1.5625}
+    oldSize: {x: 1, y: 1.5}
     newSize: {x: 1, y: 1.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
