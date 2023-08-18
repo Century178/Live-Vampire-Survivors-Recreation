@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 5;
-    private float x, y;
+    public float moveSpeed;
+    public float attackSpeed;
+    public float attackPower;
+    public float attackRange;
+    public float health;
 
+    private float x, y;
     private Rigidbody2D rb;
     private SpriteRenderer sr;
 
