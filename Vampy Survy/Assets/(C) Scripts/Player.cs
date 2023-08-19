@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static Player player { get; private set; }
+
     public float moveSpeed;
     private float x, y;
 
     public float attackSpeed;
     public float attackPower;
     public float attackRange;
+
     public float health;
+    private float hitCoolDown;
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
@@ -19,6 +23,9 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        if (player != null) Destroy(gameObject);
+        else player = this;
+
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         am = GetComponent<Animator>();
@@ -26,6 +33,8 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        hitCoolDown -= Time.deltaTime;
+
         x = Input.GetAxisRaw("Horizontal");
         y = Input.GetAxisRaw("Vertical");
 
@@ -40,5 +49,16 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(x, y).normalized * moveSpeed;
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy") && hitCoolDown <= 0)
+        {
+            health--;
+            hitCoolDown = 1.5f;
+
+            if (health <= 0) Destroy(gameObject);
+        }
     }
 }
