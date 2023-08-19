@@ -10,10 +10,12 @@ public class Enemy : MonoBehaviour
     private Transform target;
 
     private Rigidbody2D rb;
+    private SpriteRenderer sr;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
@@ -24,6 +26,9 @@ public class Enemy : MonoBehaviour
     private void FixedUpdate()
     {
         rb.position = Vector2.MoveTowards(rb.position, (Vector2)target.position, moveSpeed * Time.fixedDeltaTime);
+
+        if ((rb.position.x - target.position.x) > 0) sr.flipX = true;
+        else sr.flipX = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
