@@ -51,14 +51,24 @@ public class Player : MonoBehaviour
         rb.velocity = new Vector2(x, y).normalized * moveSpeed;
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private IEnumerator OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy") && hitCoolDown <= 0)
         {
             health--;
             hitCoolDown = 1.5f;
 
-            if (health <= 0) Destroy(gameObject);
+            if (health <= 0)
+            {
+                am.SetBool("IsDead", true);
+                GetComponent<Collider2D>().enabled = false;
+            }
+            else
+            {
+                am.SetBool("IsHurt", true);
+                yield return new WaitForSeconds(0.25f);
+                am.SetBool("IsHurt", false);
+            }
         }
     }
 }
