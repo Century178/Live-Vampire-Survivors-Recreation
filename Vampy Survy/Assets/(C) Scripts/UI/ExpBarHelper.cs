@@ -12,9 +12,14 @@ public class ExpBarHelper : MonoBehaviour
     {
         instance = this;
     }
+    private void Update()
+    {
+
+    }
     /*Fills the exp bar with an amount between 0f and 1f*/
     public void  UpdateExpBar(float amt)
     {
-        expBar.fillAmount = Mathf.Clamp01(amt);
+        Debug.Log("Fill amt: " + amt);
+        expBar.fillAmount = amt;
     }
 }

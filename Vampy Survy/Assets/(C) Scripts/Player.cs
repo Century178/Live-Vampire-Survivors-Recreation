@@ -9,10 +9,6 @@ public class Player : MonoBehaviour
     public float moveSpeed;
     private float x, y;
 
-    public float attackSpeed;
-    public float attackPower;
-    public float attackRange;
-
     public float health;
     private float hitCoolDown;
 

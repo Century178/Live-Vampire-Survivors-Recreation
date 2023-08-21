@@ -15,8 +15,11 @@ public class UpgradeManager : MonoBehaviour
     #endregion
     #region Upgrade Info
     [SerializeField] private UpgradeBase[] upgrades;
-    
-    #endregion 
+
+    #endregion
+    #region private data
+    int[] upgradeIndexes;
+    #endregion
     // Start is called before the first frame update
     void Awake()
     {
@@ -29,7 +32,7 @@ public class UpgradeManager : MonoBehaviour
     //Update Upgrade UI
     public void UpdateUpgrades()
     {
-        int[] upgradeIndexes = GetRandomUpgradeIndex(upgradeSlots.Length);
+        upgradeIndexes= GetRandomUpgradeIndex(upgradeSlots.Length);
         for(int i = 0; i < upgradeSlots.Length; i++)
         {
             upgradeSlots[i].UpdateUpgradeUI(upgrades[upgradeIndexes[i]]);
@@ -38,10 +41,17 @@ public class UpgradeManager : MonoBehaviour
     public void ShowUpgrades()
     {
         canvasGroupHelper.SetOn();
+        Time.timeScale = 0;
     }
     public void CloseUpgrades()
     {
         canvasGroupHelper.SetOff();
+        Time.timeScale = 1;
+    }
+    public void SelectUpgrade(int id)
+    {
+        upgrades[upgradeIndexes[id]].Upgrade();
+        CloseUpgrades();
     }
     #region private helper functions
     /*Get's amt weighted number of unique indexes from the upgrades list*/
@@ -60,9 +70,11 @@ public class UpgradeManager : MonoBehaviour
             while (cWeight >= 0)
             {
                 /*If the index has been selected skip this index*/
-                for (int j = 0; j < i; j++) { if (indexes[j] == index) continue; }
-                
+                bool skip = false;
+                for (int j = 0; j < i; j++) { if (indexes[j] == index) { skip = true; index++; } }
+                if (skip) continue;
                 cWeight -= upgrades[index].weight;
+                
                 /*If weight is 0 select this index and repeat selection process*/
                 if (cWeight <= 0) { indexes[i] = index; currentWeight -= upgrades[index].weight; break; }
                 /*Prevents overflow in case of unforeseen miscalculation */

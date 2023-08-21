@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance { private set; get; }
 
     private int _experience;
     public int experience { private set { _experience = value; } get { return _experience; } }
     private int currentLevelRequirement;
     private int currentLevel = 0;
+    public List<Transform> enemyList;
     #region leveling
     public void AddExperience(int amt)
     {
@@ -19,6 +21,8 @@ public class GameManager : MonoBehaviour
             
             LevelUp();
         }
+
+        ExpBarHelper.instance.UpdateExpBar(((float)experience) / currentLevelRequirement);
     }
     public void CalculateLevelRequirement()
     {
@@ -35,4 +39,10 @@ public class GameManager : MonoBehaviour
 
     }
     #endregion
+    private void Awake()
+    {
+        instance = this;
+        enemyList = new List<Transform>();
+        CalculateLevelRequirement();
+    }
 }
