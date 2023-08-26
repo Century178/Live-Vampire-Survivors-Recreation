@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AutoaimGun : MonoBehaviour
 {
-    public static AutoaimGun instance { private set; get; }
+    public static AutoaimGun Instance { private set; get; }
     [SerializeField] private GameObject bullet;
     private float timeOfLastFire;
     [SerializeField] private float timeBetweenFire=2f;
@@ -13,14 +13,14 @@ public class AutoaimGun : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        instance = this;
+        Instance = this;
     }
     private void Update()
     {
         if (Time.timeSinceLevelLoad - timeOfLastFire > timeBetweenFire * fireRateMulti&&GameManager.Instance.enemyList.Count>0)
         {
             Bullet spawnedBullet = Instantiate(bullet, transform.position, Quaternion.identity).GetComponent<Bullet>();
-            spawnedBullet.Reset((Vector2)(GameManager.Instance.enemyList[ChooseTarget()].position-transform.position),damageMulti);
+            spawnedBullet.Reset((GameManager.Instance.enemyList[ChooseTarget()].position-transform.position),damageMulti);
             timeOfLastFire = Time.timeSinceLevelLoad;
         }
     }

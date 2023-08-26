@@ -9,18 +9,9 @@ public class Enemy : MonoBehaviour
 
     private Transform target;
 
-    private Rigidbody2D rb;
-    private SpriteRenderer sr;
-
-    private void Awake()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        sr = GetComponent<SpriteRenderer>();
-    }
-
     private void Start()
     {
-        target = Player.player.transform;
+        target = Player.Instance.transform;
         GameManager.Instance.enemyList.Add(transform);
     }
 

@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    public static Player player { get; private set; }
+    public static Player Instance { get; private set; }
 
     public float moveSpeed;
     private float x, y;
@@ -13,17 +14,15 @@ public class Player : MonoBehaviour
     private float hitCoolDown;
 
     private Rigidbody2D rb;
-    private SpriteRenderer sr;
     private Animator am;
     private bool isMoving;
 
     private void Awake()
     {
-        if (player != null) Destroy(gameObject);
-        else player = this;
+        if (Instance != null) Destroy(gameObject);
+        else Instance = this;
 
         rb = GetComponent<Rigidbody2D>();
-        sr = GetComponent<SpriteRenderer>();
         am = GetComponent<Animator>();
     }
 
@@ -34,12 +33,10 @@ public class Player : MonoBehaviour
         x = Input.GetAxisRaw("Horizontal");
         y = Input.GetAxisRaw("Vertical");
 
-        if (Mathf.Abs(x) > 0.1f || Mathf.Abs(y) > 0.1f) isMoving = true;
-        else isMoving = false;
+        isMoving = (x == 0 && y == 0) ? false : true;
         am.SetBool("isMoving", isMoving);
 
-        if (x < 0) sr.flipX = true;
-        else if (x > 0) sr.flipX = false;
+        transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * Mathf.Sign(x), transform.localScale.y, transform.localScale.z);
     }
 
     private void FixedUpdate()
@@ -58,6 +55,10 @@ public class Player : MonoBehaviour
             {
                 am.SetBool("IsDead", true);
                 GetComponent<Collider2D>().enabled = false;
+                Time.timeScale = 0;
+                yield return new WaitForSecondsRealtime(1);
+                Time.timeScale = 1;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
             else
             {

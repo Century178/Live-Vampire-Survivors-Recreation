@@ -7,6 +7,6 @@ public class ExtraDamagePower : UpgradeBase
     [SerializeField] private float damageMulti = 1.5f;
     public override void Upgrade()
     {
-        AutoaimGun.instance.damageMulti *= damageMulti;
+        AutoaimGun.Instance.damageMulti *= damageMulti;
     }
 }

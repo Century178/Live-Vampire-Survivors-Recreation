@@ -7,6 +7,6 @@ public class ExtraSpeedUpgrade : UpgradeBase
     [SerializeField] private float speedMulti = 1.5f;
     public override void Upgrade()
     {
-        Player.player.moveSpeed *= speedMulti;
+        Player.Instance.moveSpeed *= speedMulti;
     }
 }
