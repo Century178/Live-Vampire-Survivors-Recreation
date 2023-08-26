@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class Player : MonoBehaviour
     private Animator am;
     private bool isMoving;
 
+    [Header("Health Bar")]
+    [SerializeField] private Slider healthBar;
+    [SerializeField] private Image healthFill;
+
     private void Awake()
     {
         if (Instance != null) Destroy(gameObject);
@@ -24,6 +29,9 @@ public class Player : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         am = GetComponent<Animator>();
+
+        healthBar.maxValue = health;
+        healthBar.value = health;
     }
 
     private void Update()
@@ -44,28 +52,34 @@ public class Player : MonoBehaviour
         rb.velocity = new Vector2(x, y).normalized * moveSpeed;
     }
 
-    private IEnumerator OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy") && hitCoolDown <= 0)
         {
-            health--;
-            hitCoolDown = 1.5f;
+            StartCoroutine(TakeDamage());
+        }
+    }
 
-            if (health <= 0)
-            {
-                am.SetBool("IsDead", true);
-                GetComponent<Collider2D>().enabled = false;
-                Time.timeScale = 0;
-                yield return new WaitForSecondsRealtime(1);
-                Time.timeScale = 1;
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            }
-            else
-            {
-                am.SetBool("IsHurt", true);
-                yield return new WaitForSeconds(0.25f);
-                am.SetBool("IsHurt", false);
-            }
+    private IEnumerator TakeDamage()
+    {
+        health--;
+        hitCoolDown = 1.5f;
+        healthBar.value = health;
+
+        if (health <= 0)
+        {
+            am.SetBool("IsDead", true);
+            GetComponent<Collider2D>().enabled = false;
+            Time.timeScale = 0;
+            yield return new WaitForSecondsRealtime(1);
+            Time.timeScale = 1;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        else
+        {
+            am.SetBool("IsHurt", true);
+            yield return new WaitForSeconds(0.25f);
+            am.SetBool("IsHurt", false);
         }
     }
 }

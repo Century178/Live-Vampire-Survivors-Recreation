@@ -16,7 +16,6 @@ public class ExpBarHelper : MonoBehaviour
     /*Fills the exp bar with an amount between 0f and 1f*/
     public void  UpdateExpBar(float amt)
     {
-        Debug.Log("Fill amt: " + amt);
         ExpBar.fillAmount = amt;
     }
 }
