@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         target = Player.player.transform;
-        GameManager.instance.enemyList.Add(transform);
+        GameManager.Instance.enemyList.Add(transform);
     }
 
     private void FixedUpdate()
@@ -32,15 +32,6 @@ public class Enemy : MonoBehaviour
         else sr.flipX = false;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        /*if (collision.gameObject.CompareTag("Bullet"))
-        {
-            health--;
-
-            if (health <= 0) Destroy(gameObject);
-        }*/
-    }
     public void TakeDamage(float amt)
     {
         health -= amt;
@@ -48,8 +39,8 @@ public class Enemy : MonoBehaviour
     }
     private void Die()
     {
-        GameManager.instance.enemyList.Remove(transform);
-        GameManager.instance.AddExperience(40);
+        GameManager.Instance.enemyList.Remove(transform);
+        GameManager.Instance.AddExperience(40);
         Destroy(gameObject);
     }
 }

@@ -17,21 +17,21 @@ public class AutoaimGun : MonoBehaviour
     }
     private void Update()
     {
-        if (Time.timeSinceLevelLoad - timeOfLastFire > timeBetweenFire * fireRateMulti&&GameManager.instance.enemyList.Count>0)
+        if (Time.timeSinceLevelLoad - timeOfLastFire > timeBetweenFire * fireRateMulti&&GameManager.Instance.enemyList.Count>0)
         {
             Bullet spawnedBullet = Instantiate(bullet, transform.position, Quaternion.identity).GetComponent<Bullet>();
-            spawnedBullet.Reset((Vector2)(GameManager.instance.enemyList[ChooseTarget()].position-transform.position),damageMulti);
+            spawnedBullet.Reset((Vector2)(GameManager.Instance.enemyList[ChooseTarget()].position-transform.position),damageMulti);
             timeOfLastFire = Time.timeSinceLevelLoad;
         }
     }
     //Assumes there is at least one target
     public int ChooseTarget()
     {
-        float minDistanceSqr = ((Vector2)(GameManager.instance.enemyList[0].position-transform.position)).sqrMagnitude;
+        float minDistanceSqr = ((Vector2)(GameManager.Instance.enemyList[0].position-transform.position)).sqrMagnitude;
         int minIndex = 0;
-        for(int i = 1; i < GameManager.instance.enemyList.Count; i++)
+        for(int i = 1; i < GameManager.Instance.enemyList.Count; i++)
         {
-            float cDistSqr = ((Vector2)(GameManager.instance.enemyList[i].position - transform.position)).sqrMagnitude;
+            float cDistSqr = ((Vector2)(GameManager.Instance.enemyList[i].position - transform.position)).sqrMagnitude;
             if (cDistSqr < minDistanceSqr)
             {
                 minDistanceSqr = cDistSqr;

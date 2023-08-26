@@ -26,7 +26,7 @@ public class EnemySpawner : MonoBehaviour
 
             for (int i = 0; i < spawnPoint.Length; i++)
             {
-                Instantiate(enemy, transform.position + spawnPoint[i], Quaternion.identity, null);
+                Instantiate(enemy, transform.position + spawnPoint[i], Quaternion.identity);
             }
         }
     }
