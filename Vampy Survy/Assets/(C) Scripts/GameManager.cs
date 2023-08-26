@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
             LevelUp();
         }
 
-        ExpBarHelper.instance.UpdateExpBar(((float)experience) / currentLevelRequirement);
+        ExpBarHelper.Instance.UpdateExpBar(((float)experience) / currentLevelRequirement);
     }
     public void CalculateLevelRequirement()
     {
@@ -31,9 +31,9 @@ public class GameManager : MonoBehaviour
     }
     public void LevelUp()
     {
-        UpgradeManager.instance.UpdateUpgrades();
+        UpgradeManager.Instance.UpdateUpgrades();
 
-        UpgradeManager.instance.ShowUpgrades();
+        UpgradeManager.Instance.ShowUpgrades();
         currentLevel++;
         CalculateLevelRequirement();
 

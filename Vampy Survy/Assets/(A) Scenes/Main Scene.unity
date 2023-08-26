@@ -2629,7 +2629,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9d6ea4f01725864287478d0471a4fae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  expBar: {fileID: 988555546}
+  ExpBar: {fileID: 988555546}
 --- !u!114 &1990904468
 MonoBehaviour:
   m_ObjectHideFlags: 0

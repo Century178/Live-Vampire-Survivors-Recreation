@@ -20,7 +20,7 @@ public class CanvasGroupHelper : MonoBehaviour
         canvasGroup.alpha = currentState ? onAlpha : offAlpha;
         UpdateCanvasInteractable();
     }
-    private void ChangeTargetAlpha(float alpha) { targetAlpha = alpha; UpdateCanvasInteractable(); StopAllCoroutines(); StartCoroutine(transitionAlpha()); }
+    private void ChangeTargetAlpha(float alpha) { targetAlpha = alpha; UpdateCanvasInteractable(); StopAllCoroutines(); StartCoroutine(TransitionAlpha()); }
     public void SetState(bool state) { currentState = state; ChangeTargetAlpha(state ? onAlpha : offAlpha); }
 
     public void SetOn()
@@ -45,7 +45,7 @@ public class CanvasGroupHelper : MonoBehaviour
     }
 
     // Update is called once per frame
-    IEnumerator transitionAlpha()
+    IEnumerator TransitionAlpha()
     {
         while (canvasGroup.alpha != targetAlpha)
         {

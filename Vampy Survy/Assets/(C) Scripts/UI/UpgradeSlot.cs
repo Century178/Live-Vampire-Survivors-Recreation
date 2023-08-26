@@ -19,13 +19,13 @@ public class UpgradeSlot : MonoBehaviour
     public void UpdateUpgradeUI(UpgradeBase info)
     {
         currentUpgrade = info;
-        nameText.text = info.name;
-        descriptionText.text = info.description;
-        iconImage.sprite = info.sprite;
+        nameText.text = info.Name;
+        descriptionText.text = info.Description;
+        iconImage.sprite = info.Sprite;
     }
     public void ChooseUpgrade()
     {
         currentUpgrade.Upgrade();
-        UpgradeManager.instance.CloseUpgrades();
+        UpgradeManager.Instance.CloseUpgrades();
     }
 }

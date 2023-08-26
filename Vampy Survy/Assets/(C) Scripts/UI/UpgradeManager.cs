@@ -5,8 +5,7 @@ using UnityEngine;
 public class UpgradeManager : MonoBehaviour
 {
     #region Singleton
-    private static UpgradeManager _instance;
-    public static UpgradeManager instance { private set { }get { return _instance; }  }
+    public static UpgradeManager Instance { get; private set; }
     #endregion
     
     #region UI
@@ -15,7 +14,6 @@ public class UpgradeManager : MonoBehaviour
     #endregion
     #region Upgrade Info
     [SerializeField] private UpgradeBase[] upgrades;
-
     #endregion
     #region private data
     int[] upgradeIndexes;
@@ -23,7 +21,7 @@ public class UpgradeManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        _instance=this;
+        Instance = this;
     }
     private void Start()
     {
@@ -73,10 +71,10 @@ public class UpgradeManager : MonoBehaviour
                 bool skip = false;
                 for (int j = 0; j < i; j++) { if (indexes[j] == index) { skip = true; index++; } }
                 if (skip) continue;
-                cWeight -= upgrades[index].weight;
+                cWeight -= upgrades[index].Weight;
                 
                 /*If weight is 0 select this index and repeat selection process*/
-                if (cWeight <= 0) { indexes[i] = index; currentWeight -= upgrades[index].weight; break; }
+                if (cWeight <= 0) { indexes[i] = index; currentWeight -= upgrades[index].Weight; break; }
                 /*Prevents overflow in case of unforeseen miscalculation */
                 index++;
                 index %= upgrades.Length;
@@ -90,7 +88,7 @@ public class UpgradeManager : MonoBehaviour
         int total = 0;
         for(int i = 0; i < upgrades.Length; i++)
         {
-            total += upgrades[i].weight;
+            total += upgrades[i].Weight;
         }
         return total;
     }

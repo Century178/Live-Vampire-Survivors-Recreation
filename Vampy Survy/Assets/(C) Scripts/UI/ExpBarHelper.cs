@@ -4,22 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ExpBarHelper : MonoBehaviour
 {
-    public static ExpBarHelper instance;
-    public Image expBar;
+    public static ExpBarHelper Instance { get; private set; }
+    public Image ExpBar;
     
     // Start is called before the first frame update
     void Awake()
     {
-        instance = this;
+        Instance = this;
     }
-    private void Update()
-    {
 
-    }
     /*Fills the exp bar with an amount between 0f and 1f*/
     public void  UpdateExpBar(float amt)
     {
         Debug.Log("Fill amt: " + amt);
-        expBar.fillAmount = amt;
+        ExpBar.fillAmount = amt;
     }
 }
