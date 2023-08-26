@@ -24,12 +24,11 @@ public class Enemy : MonoBehaviour
         GameManager.Instance.enemyList.Add(transform);
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        rb.position = Vector2.MoveTowards(rb.position, (Vector2)target.position, moveSpeed * Time.fixedDeltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
 
-        if ((rb.position.x - target.position.x) > 0) sr.flipX = true;
-        else sr.flipX = false;
+        transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * -Mathf.Sign(transform.position.x - target.position.x), transform.localScale.y, transform.localScale.z);
     }
 
     public void TakeDamage(float amt)
