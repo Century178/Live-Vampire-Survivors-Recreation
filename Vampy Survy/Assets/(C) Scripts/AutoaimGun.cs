@@ -11,8 +11,7 @@ public class AutoaimGun : MonoBehaviour
     public float fireRateMulti = 1f;
     public float damageMulti = 1f;    
 
-    // Start is called before the first frame update
-    void Awake()
+    private void Awake()
     {
         if (Instance != null) Destroy(gameObject);
         else Instance = this;
