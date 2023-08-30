@@ -7,7 +7,8 @@ public class Bullet : MonoBehaviour
     public float bulletSpeed;
     public float damage;
     public Vector2 direction;
-    public void Reset(Vector2 direction, float damageMulti)
+
+    public void ResetBullet(Vector2 direction, float damageMulti)
     {
         this.direction = direction.normalized;
         damage *= damageMulti;
@@ -18,6 +19,7 @@ public class Bullet : MonoBehaviour
     {
         transform.position += (Vector3)direction * Time.deltaTime* bulletSpeed;
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out Enemy enemy))

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+
 public class UpgradeSlot : MonoBehaviour
 {
     private UpgradeBase currentUpgrade;
@@ -12,6 +13,7 @@ public class UpgradeSlot : MonoBehaviour
     [SerializeField] TextMeshProUGUI descriptionText;
     [SerializeField] Image iconImage;
     #endregion
+
     #region debug
     [HideInInspector] public int index;
     #endregion
@@ -23,6 +25,7 @@ public class UpgradeSlot : MonoBehaviour
         descriptionText.text = info.Description;
         iconImage.sprite = info.Sprite;
     }
+
     public void ChooseUpgrade()
     {
         currentUpgrade.Upgrade();

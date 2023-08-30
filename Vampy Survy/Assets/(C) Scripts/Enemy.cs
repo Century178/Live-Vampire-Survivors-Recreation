@@ -27,6 +27,7 @@ public class Enemy : MonoBehaviour
         health -= amt;
         if (health <= 0) Die();
     }
+
     private void Die()
     {
         GameManager.Instance.enemyList.Remove(transform);

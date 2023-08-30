@@ -10,7 +10,18 @@ public class GameManager : MonoBehaviour
     private int currentLevelRequirement;
     private int currentLevel = 0;
     public List<Transform> enemyList;
+
+    private void Awake()
+    {
+        if (Instance != null) Destroy(gameObject);
+        else Instance = this;
+
+        enemyList = new List<Transform>();
+        CalculateLevelRequirement();
+    }
+
     #region leveling
+
     public void AddExperience(int amt)
     {
         Experience += amt;
@@ -23,11 +34,13 @@ public class GameManager : MonoBehaviour
 
         ExpBarHelper.Instance.UpdateExpBar(((float)Experience) / currentLevelRequirement);
     }
+
     public void CalculateLevelRequirement()
     {
         //Modify equation for the experience curve
         currentLevelRequirement = 100 + 2 * (int)Mathf.Pow(currentLevel, 1.5f);
     }
+
     public void LevelUp()
     {
         UpgradeManager.Instance.UpdateUpgrades();
@@ -38,10 +51,4 @@ public class GameManager : MonoBehaviour
 
     }
     #endregion
-    private void Awake()
-    {
-        Instance = this;
-        enemyList = new List<Transform>();
-        CalculateLevelRequirement();
-    }
 }

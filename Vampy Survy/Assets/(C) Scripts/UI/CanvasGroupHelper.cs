@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 [RequireComponent(typeof(CanvasGroup))]
-/*Repurposed by Li-huan Shen from previous projects on 8/17/2023*/
+/*Repurposed by Henry_Hamster from previous projects on 8/17/2023*/
 public class CanvasGroupHelper : MonoBehaviour
 {
     private CanvasGroup canvasGroup;
@@ -13,6 +14,7 @@ public class CanvasGroupHelper : MonoBehaviour
     [SerializeField] private float transitionSpeed = 1f;
     [Range(0f, 1f), SerializeField] float targetAlpha = 0f;
     [SerializeField] private bool currentState;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -20,24 +22,25 @@ public class CanvasGroupHelper : MonoBehaviour
         canvasGroup.alpha = currentState ? onAlpha : offAlpha;
         UpdateCanvasInteractable();
     }
+
     private void ChangeTargetAlpha(float alpha) { targetAlpha = alpha; UpdateCanvasInteractable(); StopAllCoroutines(); StartCoroutine(TransitionAlpha()); }
+
     public void SetState(bool state) { currentState = state; ChangeTargetAlpha(state ? onAlpha : offAlpha); }
 
     public void SetOn()
     {
-        //GlobalSoundManager.instance.playSFX(GlobalSoundManager.instance.uiOpen, 1);
         SetState(true);
     }
 
 
     public void SetOff()
     {
-        //GlobalSoundManager.instance.playSFX(GlobalSoundManager.instance.uiClose, 1);
         SetState(false);
     }
 
 
     public void ToggleState() { SetState(!currentState); }
+
     private void UpdateCanvasInteractable()
     {
         canvasGroup.interactable = targetAlpha >= interactableAlphaThreshold;

@@ -12,21 +12,26 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private UpgradeSlot[] upgradeSlots;
     [SerializeField] private CanvasGroupHelper canvasGroupHelper;
     #endregion
+
     #region Upgrade Info
     [SerializeField] private UpgradeBase[] upgrades;
     #endregion
+
     #region private data
     int[] upgradeIndexes;
     #endregion
+
     // Start is called before the first frame update
     void Awake()
     {
         Instance = this;
     }
+
     private void Start()
     {
         for(int i = 0; i < upgradeSlots.Length; i++) { upgradeSlots[i].index = i; }
     }
+
     //Update Upgrade UI
     public void UpdateUpgrades()
     {
@@ -36,21 +41,25 @@ public class UpgradeManager : MonoBehaviour
             upgradeSlots[i].UpdateUpgradeUI(upgrades[upgradeIndexes[i]]);
         }
     }
+
     public void ShowUpgrades()
     {
         canvasGroupHelper.SetOn();
         Time.timeScale = 0;
     }
+
     public void CloseUpgrades()
     {
         canvasGroupHelper.SetOff();
         Time.timeScale = 1;
     }
+
     public void SelectUpgrade(int id)
     {
         upgrades[upgradeIndexes[id]].Upgrade();
         CloseUpgrades();
     }
+
     #region private helper functions
     /*Get's amt weighted number of unique indexes from the upgrades list*/
     private int[] GetRandomUpgradeIndex(int amt)
@@ -82,6 +91,7 @@ public class UpgradeManager : MonoBehaviour
         }
         return indexes;
     }
+
     //Get total weight from all upgrades
     private int GetTotalWeight()
     {

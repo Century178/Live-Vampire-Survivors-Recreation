@@ -10,20 +10,24 @@ public class AutoaimGun : MonoBehaviour
     [SerializeField] private float timeBetweenFire=2f;
     public float fireRateMulti = 1f;
     public float damageMulti=1f;    
+
     // Start is called before the first frame update
     void Awake()
     {
-        Instance = this;
+        if (Instance != null) Destroy(gameObject);
+        else Instance = this;
     }
+
     private void Update()
     {
         if (Time.timeSinceLevelLoad - timeOfLastFire > timeBetweenFire * fireRateMulti&&GameManager.Instance.enemyList.Count>0)
         {
             Bullet spawnedBullet = Instantiate(bullet, transform.position, Quaternion.identity).GetComponent<Bullet>();
-            spawnedBullet.Reset((GameManager.Instance.enemyList[ChooseTarget()].position-transform.position),damageMulti);
+            spawnedBullet.ResetBullet((GameManager.Instance.enemyList[ChooseTarget()].position-transform.position),damageMulti);
             timeOfLastFire = Time.timeSinceLevelLoad;
         }
     }
+
     //Assumes there is at least one target
     public int ChooseTarget()
     {
