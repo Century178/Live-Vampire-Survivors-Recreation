@@ -20,7 +20,7 @@ public class AutoaimGun : MonoBehaviour
 
     private void Update()
     {
-        if (Time.timeSinceLevelLoad - timeOfLastFire > timeBetweenFire * fireRateMulti&&GameManager.Instance.enemyList.Count>0)
+        if (Time.timeSinceLevelLoad - timeOfLastFire > timeBetweenFire * fireRateMulti && GameManager.Instance.enemyList.Count > 0)
         {
             Bullet spawnedBullet = Instantiate(bullet, transform.position, Quaternion.identity).GetComponent<Bullet>();
             spawnedBullet.ResetBullet((GameManager.Instance.enemyList[ChooseTarget()].position-transform.position),damageMulti);
