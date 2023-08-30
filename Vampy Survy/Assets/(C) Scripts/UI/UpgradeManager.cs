@@ -35,7 +35,7 @@ public class UpgradeManager : MonoBehaviour
     //Update Upgrade UI
     public void UpdateUpgrades()
     {
-        upgradeIndexes= GetRandomUpgradeIndex(upgradeSlots.Length);
+        upgradeIndexes = GetRandomUpgradeIndex(upgradeSlots.Length);
         for(int i = 0; i < upgradeSlots.Length; i++)
         {
             upgradeSlots[i].UpdateUpgradeUI(upgrades[upgradeIndexes[i]]);
