@@ -21,7 +21,7 @@ public class UpgradeManager : MonoBehaviour
     int[] upgradeIndexes;
     #endregion
 
-    void Awake()
+    private void Awake()
     {
         if (Instance != null) Destroy(gameObject);
         else Instance = this;
