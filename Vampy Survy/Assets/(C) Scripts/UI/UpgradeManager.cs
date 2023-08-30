@@ -23,7 +23,8 @@ public class UpgradeManager : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
+        if (Instance != null) Destroy(gameObject);
+        else Instance = this;
     }
 
     private void Start()

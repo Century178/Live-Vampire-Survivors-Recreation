@@ -10,7 +10,8 @@ public class ExpBarHelper : MonoBehaviour
     
     void Awake()
     {
-        Instance = this;
+        if (Instance != null) Destroy(gameObject);
+        else Instance = this;
     }
 
     /*Fills the exp bar with an amount between 0f and 1f*/
