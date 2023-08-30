@@ -21,7 +21,6 @@ public class UpgradeManager : MonoBehaviour
     int[] upgradeIndexes;
     #endregion
 
-    // Start is called before the first frame update
     void Awake()
     {
         Instance = this;

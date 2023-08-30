@@ -8,7 +8,6 @@ public class ExpBarHelper : MonoBehaviour
     public static ExpBarHelper Instance { get; private set; }
     public Image ExpBar;
     
-    // Start is called before the first frame update
     void Awake()
     {
         Instance = this;

@@ -7,7 +7,7 @@ public class AutoaimGun : MonoBehaviour
     public static AutoaimGun Instance { private set; get; }
     [SerializeField] private GameObject bullet;
     private float fireTime;
-    [SerializeField] private float fireRate = 2f;
+    [SerializeField] private float fireRate = 1f;
     public float fireRateMulti = 1f;
     public float damageMulti = 1f;    
 
@@ -19,11 +19,12 @@ public class AutoaimGun : MonoBehaviour
 
     private void Update()
     {
-        if (Time.timeSinceLevelLoad - fireTime > fireRate * fireRateMulti && GameManager.Instance.enemyList.Count > 0)
+        fireTime += Time.deltaTime;
+        if (fireTime > fireRate * fireRateMulti && GameManager.Instance.enemyList.Count > 0)
         {
             Bullet spawnedBullet = Instantiate(bullet, transform.position, Quaternion.identity).GetComponent<Bullet>();
             spawnedBullet.ResetBullet((GameManager.Instance.enemyList[ChooseTarget()].position-transform.position),damageMulti);
-            fireTime = Time.timeSinceLevelLoad;
+            fireTime = 0;
         }
     }
 

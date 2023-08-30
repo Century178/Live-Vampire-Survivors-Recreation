@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CanvasGroup))]
-/*Repurposed by Henry_Hamster from previous projects on 8/17/2023*/
 public class CanvasGroupHelper : MonoBehaviour
 {
     private CanvasGroup canvasGroup;
@@ -15,7 +14,6 @@ public class CanvasGroupHelper : MonoBehaviour
     [Range(0f, 1f), SerializeField] float targetAlpha = 0f;
     [SerializeField] private bool currentState;
 
-    // Start is called before the first frame update
     void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
@@ -47,7 +45,6 @@ public class CanvasGroupHelper : MonoBehaviour
         canvasGroup.blocksRaycasts = targetAlpha >= interactableAlphaThreshold;
     }
 
-    // Update is called once per frame
     IEnumerator TransitionAlpha()
     {
         while (canvasGroup.alpha != targetAlpha)
