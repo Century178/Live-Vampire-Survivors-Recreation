@@ -582,7 +582,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -720.00024, y: 0}
+  m_AnchoredPosition: {x: -720.0002, y: 0}
   m_SizeDelta: {x: -1440, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &366483141
@@ -768,7 +768,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 671269061100564427, guid: e8b3a33f1bb6c0c47b5b89a0a76834b1, type: 3}
-  timeBetweenFire: 0.5
+  fireRate: 1
   fireRateMulti: 1
   damageMulti: 1
 --- !u!212 &543083594
